@@ -129,14 +129,27 @@ matrice_error extraire_row_of_matrice(mat *M, mat *row, int indice){
 // produit de 2 matrices 
 
 matrice_error matriceXmatrice(mat *M, mat *N, mat *destination){
-    int ligne_m, ligne_n, colonne_m, colonne_n;
+    int ligne_m, ligne_n, colonne_m, colonne_n, indice, *valeur;
     ligne_m=line_of_matrice(M);
     ligne_n=line_of_matrice(N);
     colonne_m=row_of_matrice(M);
     colonne_n=row_of_matrice(N);
-    for (size_t i = 0; i < count; i++)
+    indice=0;
+    valeur=0;
+    if (colonne_m!=ligne_n)
     {
-        /* code */
+        return MATRICE_DIM_ERROR;
+    }
+    mat *matrice_ligne, *matrice_colonne;
+    for(int i = 0; i < ligne_m*(colonne_m-1) ; i+=colonne_m)
+    {
+        extraire_line_of_matrice(M,matrice_ligne,i);
+        for (int j = 0; j < colonne_n ; j++)
+        {
+            extraire_row_of_matrice(N,matrice_colonne,j);
+            ligneXcolonne(matrice_ligne, matrice_colonne,valeur);
+        }
+        
     }
     
     
