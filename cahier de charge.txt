@@ -1,0 +1,16 @@
+Alpha permettra :
+d'effectuer les operations d'addition de soustraction et de multiplications sur les matrices.
+de resoudre des equations lineaire grace au pivot de gauss.
+
+PROJET A FINIR IMPERATIVEMENT AVANT LE 11 AVRIL
+
+Ecrire une focntion qui : 
+initialise une matrice 
+ajoute des éléments à une matrice 
+libère l'espace alloué à une  matrice après utilisation 
+donne le nombre de ligne d'une matrice
+donne le nombre de colonne d'une matrice
+affiche les elements d'une matrice 
+permet de faire l'addition de 2 matrices 
+permet de réaliser le produit de 2 matrices 
+
