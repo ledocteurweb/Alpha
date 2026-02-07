@@ -1,5 +1,6 @@
 #ifndef MATRICE_H
 #define MATRICE_H
+# include <stdlib.h>
 
 typedef struct matrice
 {
@@ -20,6 +21,8 @@ typedef enum{
 // initialisation d'une matrice 
 
 matrice_error initialise_matrice(mat *M, int ligne, int colonne);
+
+void liberer_matrice(mat *M);
 
 // recuperation des lignes et des colonnes
 
