@@ -1,15 +1,6 @@
 #include <stdio.h>
 #include "matrice.h"
 
-void afficher_matrice(mat *M){
-    for (int i = 0; i < M->ligne; i++) {
-        for (int j = 0; j < M->colonne; j++) {
-            printf("%6.2f ", M->tab[i * M->colonne + j]);
-        }
-        printf("\n");
-    }
-}
-
 int main(void){
     mat A, B, C;
 
