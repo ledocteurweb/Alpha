@@ -1,6 +1,7 @@
 #ifndef MATRICE_H
 #define MATRICE_H
-# include <stdlib.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct matrice
 {
@@ -34,6 +35,8 @@ int row_of_matrice(mat *M);
 
 matrice_error affecter_valeurs(mat *M, int indice_ligne, int indice_colonne, double val);
 
+void afficher_matrice(mat *M);
+
 //  addition de 2 matrices .La matrice destination contiendra la somme des  matrices M et N
 
 matrice_error additioner_matrice(mat *M, mat *N, mat *destination);
@@ -41,12 +44,6 @@ matrice_error additioner_matrice(mat *M, mat *N, mat *destination);
 // multiplication d'une matrice par un reel 
 
 matrice_error reelXmatrice(mat *M, double val, mat *destination);
-
-matrice_error ligneXcolonne(mat *M, mat*N, int *resultat);
-
-matrice_error extraire_line_of_matrice(mat *M, mat *line, int indice);
-
-matrice_error extraire_row_of_matrice(mat *M, mat *row, int indice);
 
 // produit de 2 matrices 
 

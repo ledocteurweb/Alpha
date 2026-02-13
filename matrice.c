@@ -1,5 +1,4 @@
 #include "matrice.h"
-#include <stdio.h>
 
 // La fonction ci dessous verifie  que les lignes et les colonnes donne en paramètre sont bien positifs 
 
@@ -42,6 +41,15 @@ matrice_error affecter_valeurs(mat *M, int indice_ligne, int indice_colonne, dou
     return MATRICE_INDICE_ERROR;
 }
 
+
+void afficher_matrice(mat *M){
+    for (int indice_ligne = 0; indice_ligne < M->ligne; indice_ligne++) {
+        for (int indice_colonne = 0; indice_colonne < M->colonne; indice_colonne++) {
+            printf("%f ", M->tab[indice_ligne * M->colonne + indice_colonne]);
+        }
+        printf("\n");
+    }
+}
 //  addition de 2 matrices .La matrice destination contiendra la somme des  matrices M et N
 
 matrice_error additioner_matrice(mat *M, mat *N, mat *destination){
