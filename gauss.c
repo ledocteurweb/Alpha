@@ -88,3 +88,52 @@ matrice_error verif_egalite_ligne(mat *M){
     }
     return MATRICE_CORRECT;
 }
+
+
+matrice_error solve_by_gauss(mat *A, mat *X, mat *B){
+    int lignea,lignex,colonnea;
+    lignea=line_of_matrice(A);
+    lignex=line_of_matrice(X);
+    colonnea=row_of_matrice(X);
+    // verifier les préconditions
+    if(lignea!=lignex)
+        return MATRICE_DIM_ERROR;
+    for (int indice_ligne = 0; indice_ligne < lignea; indice_ligne++)
+    {
+        if (verif_ligne_null(A,indice_ligne)!=MATRICE_CORRECT)
+            return MATRICE_LIGNE_NULL;
+    }
+    for (int indice_colonne = 0; indice_colonne < colonnea; indice_colonne++)
+    {
+        if(verif_colonne_null(A,indice_colonne)!=MATRICE_CORRECT)
+            return MATRICE_COLONNE_NULL;
+    }
+    if(verif_egalite_ligne(M)!=MATRICE_CORRECT)
+        return MATRICE_LIGNE_DOUBLE;
+    // debut de la résolution de l'equation   
+    int indice_pivot;
+    if(initialise_matrice(B,lignea,colonnea)!=MATRICE_CORRECT)
+        return MATRICE_ALLOC_ERROR;
+    
+    for (int indice_ligne = 0; indice_ligne < lignea; indice_ligne++)
+    {
+        // trouver la ligne pivot
+        indice_pivot=indice_ligne;
+        if (A->tab[colonnea*indice_ligne + indice_ligne]==0)
+        {
+            for (int indice_ligne2 = indice_pivot; indice_ligne2 < colonnea; indice_ligne2++)
+            {
+                if (A->tab[colonnea*indice_ligne2 + indice_ligne]!=0){
+                    indice_pivot=indice_ligne2;
+                }
+            }          
+        }
+        
+
+
+
+        
+    }
+    
+
+}

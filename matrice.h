@@ -40,6 +40,8 @@ matrice_error affecter_valeurs(mat *M, int indice_ligne, int indice_colonne, dou
 
 void afficher_matrice(mat *M);
 
+matrice_error copimatrice(mat *M, mat *destination);
+
 //  addition de 2 matrices .La matrice destination contiendra la somme des  matrices M et N
 
 matrice_error additioner_matrice(mat *M, mat *N, mat *destination);

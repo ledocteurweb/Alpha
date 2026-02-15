@@ -50,6 +50,25 @@ void afficher_matrice(mat *M){
         printf("\n");
     }
 }
+
+matrice_error copimatrice(mat *M, mat *destination){
+    int ligne,colonne;
+    ligne=line_of_matrice(M);
+    colonne=row_of_matrice(M);
+
+    if (initialise_matrice(destination,ligne,colonne)!=MATRICE_CORRECT)
+        return MATRICE_NULL_ERROR;
+    
+    for (int indice_ligne = 0; indice_ligne < ligne; indice_ligne++)
+    {
+        for (int indice_colonne = 0; indice_colonne < colonne; indice_colonne++)
+        {
+            destination->tab[indice_ligne*colonne + indice_colonne]=M->tab[indice_ligne*colonne + indice_colonne];
+        }
+        
+    }
+    return MATRICE_CORRECT;    
+}
 //  addition de 2 matrices .La matrice destination contiendra la somme des  matrices M et N
 
 matrice_error additioner_matrice(mat *M, mat *N, mat *destination){
