@@ -142,7 +142,7 @@ matrice_error solve_by_gauss(mat *A, mat *X, mat *B){
         if(verif_colonne_null(A,indice_colonne)!=MATRICE_CORRECT)
             return MATRICE_COLONNE_NULL;
     }
-    if(verif_egalite_ligne(M)!=MATRICE_CORRECT)
+    if(verif_egalite_ligne(A)!=MATRICE_CORRECT)
         return MATRICE_LIGNE_DOUBLE;
     // debut de la résolution de l'equation  
 
@@ -161,8 +161,9 @@ matrice_error solve_by_gauss(mat *A, mat *X, mat *B){
         }
     }
     if(indice_pivot!=0){
-        if(echange_ligne(M,0,indice_pivot)!=MATRICE_CORRECT)
+        if(echange_ligne(A,0,indice_pivot)!=MATRICE_CORRECT)
             return MATRICE_INDICE_ERROR;
     }
+    
 
 }
