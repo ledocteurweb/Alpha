@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "matrice.h"
-#include "gauss.h" // Assure-toi que ce header contient le prototype de solve_by_gauss
+#include "gauss.h" 
 
 int main() {
     mat A, X;
