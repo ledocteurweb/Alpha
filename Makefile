@@ -1,12 +1,12 @@
 # Nom de l'exécutable
-EXEC = test_matrice
+EXEC = test_gauss
 
 # Compilateur et options
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -g
 
 # Fichiers sources
-SRCS = main.c matrice.c gauss.c
+SRCS = test_gauss.c matrice.c gauss.c
 
 # Fichiers objets
 OBJS = $(SRCS:.c=.o)

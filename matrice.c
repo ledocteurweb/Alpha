@@ -45,7 +45,7 @@ matrice_error affecter_valeurs(mat *M, int indice_ligne, int indice_colonne, dou
 void afficher_matrice(mat *M){
     for (int indice_ligne = 0; indice_ligne < M->ligne; indice_ligne++) {
         for (int indice_colonne = 0; indice_colonne < M->colonne; indice_colonne++) {
-            printf("%f ", M->tab[indice_ligne * M->colonne + indice_colonne]);
+            printf("% .2f ", M->tab[indice_ligne * M->colonne + indice_colonne]);
         }
         printf("\n");
     }
