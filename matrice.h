@@ -32,9 +32,8 @@ void liberer_matrice(mat *M);
 
 int line_of_matrice(mat *M);
 
-int row_of_matrice(mat *M);
+int column_of_matice(mat *M);
 
-// ajout des valeurs à une matrice (ici ligne et colonne désigne la position d'affectation de la valeur )
 
 matrice_error affecter_valeurs(mat *M, int indice_ligne, int indice_colonne, double val);
 
@@ -53,6 +52,10 @@ matrice_error reelXmatrice(mat *M, double val, mat *destination);
 // produit de 2 matrices 
 
 matrice_error matriceXmatrice(mat *M, mat *N, mat *destination);
+
+
+
+void lirematrice(mat *M);
 
 
 #endif 

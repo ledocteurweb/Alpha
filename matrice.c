@@ -26,15 +26,15 @@ int line_of_matrice(mat *M){
     return M->ligne;
 }
 
-int row_of_matrice(mat *M){
+int column_of_matice(mat *M){
     return M->colonne;
 }
 
 // cette fonction verifiera que la position ou l'on veut affecter notre valeur est bien accesible 
 
 matrice_error affecter_valeurs(mat *M, int indice_ligne, int indice_colonne, double val){
-    if(((0<=indice_ligne)&& (indice_ligne<line_of_matrice(M))) && ((0<=indice_colonne) && (indice_colonne<row_of_matrice(M)))){
-        int colonne = row_of_matrice(M) ;
+    if(((0<=indice_ligne)&& (indice_ligne<line_of_matrice(M))) && ((0<=indice_colonne) && (indice_colonne<column_of_matice(M)))){
+        int colonne = column_of_matice(M) ;
         M->tab[indice_colonne + colonne*indice_ligne ] = val ;
         return MATRICE_CORRECT;
     }
@@ -54,7 +54,7 @@ void afficher_matrice(mat *M){
 matrice_error copimatrice(mat *M, mat *destination){
     int ligne,colonne;
     ligne=line_of_matrice(M);
-    colonne=row_of_matrice(M);
+    colonne=column_of_matice(M);
 
     if (initialise_matrice(destination,ligne,colonne)!=MATRICE_CORRECT)
         return MATRICE_NULL_ERROR;
@@ -72,14 +72,14 @@ matrice_error copimatrice(mat *M, mat *destination){
 //  addition de 2 matrices .La matrice destination contiendra la somme des  matrices M et N
 
 matrice_error additioner_matrice(mat *M, mat *N, mat *destination){
-    if (line_of_matrice(M)!=line_of_matrice(N) || row_of_matrice(M)!=row_of_matrice(N))
+    if (line_of_matrice(M)!=line_of_matrice(N) || column_of_matice(M)!=column_of_matice(N))
     {
         return MATRICE_INDICE_ERROR;
     }
     
     int ligne,colonne;
     ligne=line_of_matrice(M);
-    colonne=row_of_matrice(M);
+    colonne=column_of_matice(M);
     if (initialise_matrice(destination,ligne,colonne) != MATRICE_CORRECT)
         return MATRICE_ALLOC_ERROR;
     for (int indice_ligne = 0; indice_ligne < ligne; indice_ligne++)
@@ -97,7 +97,7 @@ matrice_error additioner_matrice(mat *M, mat *N, mat *destination){
 matrice_error reelXmatrice(mat *M, double val, mat *destination){
     int ligne,colonne;
     ligne=line_of_matrice(M);
-    colonne=row_of_matrice(M);
+    colonne=column_of_matice(M);
     if(initialise_matrice(destination,ligne,colonne)!= MATRICE_CORRECT)
         return MATRICE_ALLOC_ERROR;
     for (int indice_ligne = 0; indice_ligne < ligne; indice_ligne++)
@@ -114,22 +114,57 @@ matrice_error reelXmatrice(mat *M, double val, mat *destination){
 // produit d'une matrice ligne par une colonne 
 
 matrice_error matriceXmatrice(mat *M, mat *N, mat *destination){
+    int lignem, colonnem, colonnen;
     double valeur;
+    lignem=line_of_matrice(M);
+    colonnem=column_of_matice(M);
+    colonnen=column_of_matice(N);
     if (M->colonne != N->ligne)
         return MATRICE_DIM_ERROR;
 
-    if (initialise_matrice(destination, M->ligne, N->colonne) != MATRICE_CORRECT)
+    if (initialise_matrice(destination, lignem, colonnen) != MATRICE_CORRECT)
         return MATRICE_ALLOC_ERROR;
 
-    for (int i = 0; i < M->ligne; i++) {
-        for (int j = 0; j < N->colonne; j++) {
+    for (int indice_ligne = 0; indice_ligne < lignem; indice_ligne++) {
+        for (int indice_colonne = 0; indice_colonne < colonnen; indice_colonne++) {
             valeur = 0;
-            for (int k = 0; k < M->colonne; k++) {
-                valeur += M->tab[i*M->colonne + k] *
-                         N->tab[k*N->colonne + j];
+            for (int tmp = 0; tmp < colonnem; tmp++) {
+                valeur += M->tab[indice_ligne*colonnem + tmp] *
+                         N->tab[tmp*colonnen + indice_colonne];
             }
-            destination->tab[i*N->colonne + j] = valeur;
+            destination->tab[indice_ligne*colonnen + indice_colonne] = valeur;
         }
     }
     return MATRICE_CORRECT;
+}
+
+void lirematrice(mat *M){
+
+    int ligne,colonne;
+    do
+    {
+        printf("Entrer le nombre de ligne de votre matrice (entier strictement positif) ");
+        scanf("%d",&ligne);
+        printf("\n");
+    } while (ligne <= 0);
+
+    do
+    {
+        printf("Entrer le nombre de colonne de votre matrice (entier stirctement positif) ");
+        scanf("%d",&colonne);
+        printf("\n");
+    } while (colonne <= 0);
+
+
+    initialise_matrice(M,ligne,colonne);
+
+    for (int indice_ligne = 0; indice_ligne < ligne; indice_ligne++)
+    {
+        for (int indice_colonne = 0; indice_colonne < colonne; indice_colonne++)
+        {
+            printf("Entrer la valeur du coefficient de la matrice à l'indice (%d,%d) ", indice_ligne, indice_colonne);
+            scanf("%lf",  &M->tab[indice_ligne*colonne +indice_colonne]);
+        }
+    }
+
 }

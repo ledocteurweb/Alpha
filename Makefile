@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -g
 
 # Fichiers sources
-SRCS = main.c matrice.c
+SRCS = main.c matrice.c gauss.c
 
 # Fichiers objets
 OBJS = $(SRCS:.c=.o)

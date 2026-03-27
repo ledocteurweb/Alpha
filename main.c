@@ -1,47 +1,44 @@
 #include <stdio.h>
 #include "matrice.h"
+#include "gauss.h" // Assure-toi que ce header contient le prototype de solve_by_gauss
 
-int main(void){
-    mat A, B, C;
+int main() {
+    mat A, X;
+    matrice_error err;
 
-    /* Initialisation des matrices */
-    initialise_matrice(&A, 2, 3);
-    initialise_matrice(&B, 3, 2);
+    // 1. Initialisation de la matrice A (3x3)
+    initialise_matrice(&A, 3, 3);
+    affecter_valeurs(&A, 0, 0, 2.0);  affecter_valeurs(&A, 0, 1, 1.0);  affecter_valeurs(&A, 0, 2, -1.0);
+    affecter_valeurs(&A, 1, 0, -3.0); affecter_valeurs(&A, 1, 1, -1.0); affecter_valeurs(&A, 1, 2, 2.0);
+    affecter_valeurs(&A, 2, 0, -2.0); affecter_valeurs(&A, 2, 1, 1.0);  affecter_valeurs(&A, 2, 2, 2.0);
 
-    /* Remplissage de A */
-    affecter_valeurs(&A, 0, 0, 1);
-    affecter_valeurs(&A, 0, 1, 2);
-    affecter_valeurs(&A, 0, 2, 3);
-    affecter_valeurs(&A, 1, 0, 4);
-    affecter_valeurs(&A, 1, 1, 5);
-    affecter_valeurs(&A, 1, 2, 6);
+    // 2. Initialisation du vecteur X (3x1) avec les valeurs du second membre (b)
+    initialise_matrice(&X, 3, 1);
+    affecter_valeurs(&X, 0, 0, 8.0);
+    affecter_valeurs(&X, 1, 0, -11.0);
+    affecter_valeurs(&X, 2, 0, -3.0);
 
-    /* Remplissage de B */
-    affecter_valeurs(&B, 0, 0, 7);
-    affecter_valeurs(&B, 0, 1, 8);
-    affecter_valeurs(&B, 1, 0, 9);
-    affecter_valeurs(&B, 1, 1, 10);
-    affecter_valeurs(&B, 2, 0, 11);
-    affecter_valeurs(&B, 2, 1, 12);
+    printf("--- Systeme avant resolution ---\n");
+    printf("Matrice A :\n"); afficher_matrice(&A);
+    printf("Vecteur b (stocke dans X) :\n"); afficher_matrice(&X);
 
-    printf("Matrice A :\n");
-    afficher_matrice(&A);
+    // 3. Appel de ta fonction corrigee
+    err = solve_by_gauss(&A, &X);
 
-    printf("\nMatrice B :\n");
-    afficher_matrice(&B);
-
-    /* Multiplication A x B */
-    if (matriceXmatrice(&A, &B, &C) == MATRICE_CORRECT) {
-        printf("\nMatrice C = A x B :\n");
-        afficher_matrice(&C);
+    if (err == MATRICE_CORRECT) {
+        printf("\n--- Resolution reussie ---\n");
+        printf("Le vecteur solution x est :\n");
+        // On affiche X qui contient maintenant les resultats x, y, z
+        for(int i=0; i < X.ligne; i++) {
+            printf("x[% d] = % .2f\n", i, X.tab[i]);
+        }
     } else {
-        printf("Erreur lors de la multiplication\n");
+        printf("\nErreur lors de la resolution : code %d\n", err);
     }
 
-    /* Libération mémoire */
+    // 4. Nettoyage
     liberer_matrice(&A);
-    liberer_matrice(&B);
-    liberer_matrice(&C);
+    liberer_matrice(&X);
 
     return 0;
 }
